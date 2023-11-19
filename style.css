@@ -1,4 +1,5 @@
 /* Resetting default margin and padding for all elements */
+
 * {
   padding: 0;
   margin: 0;
@@ -15,9 +16,9 @@ body #fullheight {
 
 /* Styling for the container holding the calculator */
 .container {
-  height: 100%; /* Filling the entire viewport height */
+  height: 814px;
+  width: 414px; /* Filling the entire viewport height */
   background-color: black; /* Setting a black background color for the container */
-  margin-top: 280px; /* Adding top margin to position it below a certain area */
 }
 
 /* Styling for the result display area */
