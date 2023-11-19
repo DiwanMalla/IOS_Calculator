@@ -1,10 +1,13 @@
-const numbers = document.querySelectorAll(`.numbers`);
-const result = document.querySelector(`.result span`);
-const clear = document.querySelector(`.clear`);
-const negative = document.querySelector(`.negative`);
-const signs = document.querySelectorAll(`.sign`);
-const percent = document.querySelector(`.percent`);
-const equals = document.querySelector(`.equals`);
+// Selecting DOM elements
+const numbers = document.querySelectorAll(".numbers");
+const result = document.querySelector(".result span");
+const clear = document.querySelector(".clear");
+const negative = document.querySelector(".negative");
+const signs = document.querySelectorAll(".sign");
+const percent = document.querySelector(".percent");
+const equals = document.querySelector(".equals");
+
+// Initializing variables for calculations
 let firstValue = "";
 let isFirstValue = false;
 let secondValue = "";
@@ -13,34 +16,42 @@ let sign = "";
 let resultValue = 0;
 let reserveValue = 0;
 
+// Adding click event listeners to number buttons
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     let atr = number.textContent;
     console.log(atr);
+
+    // Checking if it's the first value being entered
     if (isFirstValue == false) {
       getFirstValue(atr);
     }
 
+    // Checking if it's the second value being entered
     if (isSecondValue == false) {
       getSecondValue(atr);
     }
   });
 });
+
+// Function to get the first value entered
 function getFirstValue(anotherNumber) {
   result.innerHTML = "";
   firstValue += anotherNumber;
   result.innerHTML = firstValue;
-  firstValue = +firstValue;
+  firstValue = +firstValue; // Converting to a number
   result.innerHTML = firstValue;
 }
 
+// Function to get the second value entered
 function getSecondValue(secondNumber) {
   result.innerHTML = "";
-
   secondValue += secondNumber;
   result.innerHTML = secondValue;
-  secondValue = +secondValue;
+  secondValue = +secondValue; // Converting to a number
 }
+
+// Function to handle sign buttons
 getSign();
 function getSign() {
   signs.forEach((signClick) => {
@@ -52,17 +63,25 @@ function getSign() {
     });
   });
 }
+
+// Clear button click event
 clear.addEventListener("click", () => {
   firstValue = "";
+  isFirstValue = false;
+  secondValue = "";
+  isSecondValue = true;
+  sign = "";
+  resultValue = 0;
+  reserveValue = 0;
   result.innerHTML = "0";
 });
 
+// Equals button click event
 equals.addEventListener("click", () => {
   if (secondValue == "") {
     secondValue = reserveValue;
   }
-  console.log(firstValue);
-  console.log(secondValue);
+  // Performing calculations based on the selected operator
   result.innerHTML = "";
   switch (sign) {
     case "+": {
@@ -89,11 +108,12 @@ equals.addEventListener("click", () => {
   firstValue = resultValue;
   reserveValue = secondValue;
   secondValue = "";
-  console.log(resultValue);
 
+  // Checking and formatting the result value if needed
   checkResult();
 });
 
+// Function to check and format the result value
 function checkResult() {
   resultValueString = JSON.stringify(resultValue);
   console.log(resultValueString);
@@ -102,6 +122,8 @@ function checkResult() {
     result.innerHTML = resultValue.toFixed(3);
   }
 }
+
+// Percentage button click event
 percent.addEventListener("click", () => {
   result.innerHTML = "";
   if (firstValue != "") {
@@ -111,6 +133,7 @@ percent.addEventListener("click", () => {
   result.innerHTML = resultValue;
 });
 
+// Negative button click event
 negative.addEventListener("click", () => {
   if (firstValue != "") {
     result.innerHTML = "";
